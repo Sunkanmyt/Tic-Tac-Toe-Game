@@ -26,7 +26,7 @@ def enter_move(board):
         
         loc = move - 1 # Get the actual index of the user's input since indexing starts from 0
         row = loc // 3 # Get the row it falls in.
-        col = loc % 3 # Get rhe column it falls in.
+        col = loc % 3 # Get the column it falls in.
         
         if board[row][col] not in ["O", "X"]: # Check if the field is filled already
            board[row][col] = "O"
@@ -43,7 +43,7 @@ def make_list_of_free_fields(board):
     for row in range(3):
         for col in range(3):
             if board[row][col] not in ["O", "X"]: # Check that the field is not yet occupied
-                free.append((row,col)) # Append the index of the row and column of the field as a tuple in the format => (row, col)
+                free.append((row,col)) # Append the index of the row and column of the field as a tuple in the format => (row, col) to the "free" list
     
     return free # Return the list of free fields on the board
 
@@ -69,10 +69,10 @@ def victory_for(board, sign):
         elif board[rc][0] == sign and board[rc][1] == sign and board[rc][2] == sign: # To check the rows
             return who
 
-    return None # Return an "None" value in the event that no winner emerges
+    return None # Return a "None" value in the event that no winner emerges
 
 
-# Create a function to allow the computer program make a move on the board
+# Create a function to allow the computer program make a move
 def draw_move(board):
 	free = make_list_of_free_fields(board) # Make a list of free fields using the previous function created
 	cnt = len(free) # Get how many free fields are availble
@@ -85,7 +85,7 @@ def draw_move(board):
 
 # Create a 2D list using the appropriate syntax
 board = [[3 * j + i + 1 for i in range(3)] for j in range(3)] 
-board[1][1] = "X" # Allow the computer program enter it's value first at the middle field
+board[1][1] = "X" # Allow the computer program make the first move at the center
 display_board(board)
     
 fields = make_list_of_free_fields(board) # Get the list of available fields
@@ -95,10 +95,10 @@ my_move = True
 while len(fields) > 0:
     if my_move: # This runs when the user's move (my_move) is True
         enter_move(board) # The user enters a move
-        victor = victory_for(board, "O") # Check for victory
+        victor = victory_for(board, "O") # Checks for victory
     else:
         draw_move(board) # Computer enters a move
-        victor = victory_for(board, "X") # Check for victory
+        victor = victory_for(board, "X") # Checks for victory
 
     display_board(board)    
     if victor != None: 
